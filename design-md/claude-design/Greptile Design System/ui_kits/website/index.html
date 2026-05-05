@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greptile — Marketing Website UI Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Anybody:ital,wght@1,400;1,600;1,700;1,800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #EEEEEE; font-family: 'DM Sans', sans-serif; color: #2A2A2A; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      background-repeat: repeat; background-size: 256px 256px; }
+    * { position: relative; z-index: 1; }
+    .ticker-wrap { background: #2A2A2A; overflow: hidden; white-space: nowrap; padding: 10px 0; }
+    .ticker-track { display: inline-block; animation: tickerMove 18s linear infinite; }
+    .ticker-text { font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: rgba(238,238,238,0.5); padding-right: 60px; }
+    @keyframes tickerMove { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    hr.divider { border: none; border-top: 1px solid rgba(85,83,104,0.15); margin: 0; }
+    a { color: inherit; }
+    button { font-family: 'DM Sans', sans-serif; }
+  </style>
+</head>
+<body>
+<script type="text/babel" src="Header.jsx"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="FeatureSection.jsx"></script>
+<script type="text/babel" src="Footer.jsx"></script>
+
+<script type="text/babel">
+const { useState } = React;
+
+// Ticker strip component
+const Ticker = ({ text = 'TEST · RUN · EXECUTE' }) => (
+  <div className="ticker-wrap">
+    <div className="ticker-track">
+      {Array(6).fill(null).map((_, i) => (
+        <span key={i} className="ticker-text">{text} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+      ))}
+    </div>
+  </div>
+);
+
+// CTA Banner section
+const CTABanner = ({ onCTA }) => (
+  <section style={{ background: '#EEEEEE', padding: '80px 48px', textAlign: 'center', borderTop: '1px solid rgba(85,83,104,0.12)' }}>
+    <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 36, color: '#2A2A2A', marginBottom: 12, letterSpacing: '-0.02em' }}>
+      Greptile is building the code validation layer<br />so you can get back to shipping.
+    </h2>
+    <div style={{ display: 'flex', gap: 12, justifyContent: 'center', marginTop: 28 }}>
+      <button onClick={onCTA} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#EEEEEE', background: '#2A2A2A', border: 'none', borderRadius: 9999, padding: '12px 24px', cursor: 'pointer' }}>
+        View Pricing
+      </button>
+      <button style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 700, color: '#2A2A2A', background: '#28E99F', border: 'none', borderRadius: 9999, padding: '12px 24px', cursor: 'pointer' }}>
+        Start now
+      </button>
+    </div>
+  </section>
+);
+
+// Security section
+const SecuritySection = () => (
+  <section style={{ background: '#F9F7F3', padding: '72px 48px' }}>
+    <div style={{ maxWidth: 1280, margin: '0 auto' }}>
+      <h2 style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 700, fontSize: 36, color: '#2A2A2A', marginBottom: 8, letterSpacing: '-0.02em' }}>Security-First Design</h2>
+      <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 16, color: '#555368', marginBottom: 40 }}>Built for enterprises across defense, healthcare, and financial services.</p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+        {[
+          { num: '01', title: 'Self-Hosted Deployment', desc: 'Host Greptile in your own air-gapped environment.' },
+          { num: '02', title: 'SOC 2 Compliance', desc: 'Independent audits, reports available on request.' },
+          { num: '03', title: 'Enterprise Ready', desc: 'SSO, audit logs, dedicated support.' },
+        ].map(item => (
+          <div key={item.num} style={{ background: '#EEEEEE', borderRadius: 12, padding: '24px' }}>
+            <div style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: '#787878', marginBottom: 12 }}>{item.num}</div>
+            <div style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 600, fontSize: 16, color: '#2A2A2A', marginBottom: 8 }}>{item.title}</div>
+            <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.6, color: '#555368' }}>{item.desc}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+// Page router
+const App = () => {
+  const [page, setPage] = useState('home');
+
+  if (page === 'agent') {
+    return (
+      <div>
+        <Header />
+        <section style={{ background: '#EEEEEE', padding: '80px 48px 64px', textAlign: 'center' }}>
+          <span style={{ fontFamily: "'Space Mono', monospace", fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.12em', color: '#555368' }}>[ AGENT ]</span>
+          <h1 style={{ fontFamily: "'Anybody', sans-serif", fontStyle: 'italic', fontWeight: 700, fontSize: 72, lineHeight: 1.05, letterSpacing: '-0.02em', color: '#2A2A2A', margin: '16px 0 20px' }}>The code reviewer<br />that catches real bugs.</h1>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 18, color: '#555368', marginBottom: 32 }}>Greptile is purpose-built to surface the bugs that slip through code review.</p>
+          <div style={{ display: 'flex', gap: 12, justifyContent: 'center', marginBottom: 12 }}>
+            <button style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 700, color: '#2A2A2A', background: '#28E99F', border: 'none', borderRadius: 9999, padding: '12px 24px', cursor: 'pointer' }}>get started</button>
+            <button style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, fontWeight: 600, color: '#2A2A2A', background: 'transparent', border: '1.5px solid rgba(85,83,104,0.35)', borderRadius: 9999, padding: '12px 24px', cursor: 'pointer' }}>contact sales</button>
+          </div>
+          <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: '#787878' }}>no credit card required • 14-day free trial</p>
+          <p style={{ fontFamily: "'Space Mono', monospace", fontSize: 10, color: '#555368', marginTop: 32, opacity: 0.6 }}>fig 1. autonomous code review agent</p>
+        </section>
+        <hr className="divider" />
+        <HowItWorks />
+        <hr className="divider" />
+        <AnatomySection />
+        <CTABanner onCTA={() => setPage('home')} />
+        <Footer />
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <Header />
+      <Hero onCTA={() => setPage('agent')} />
+      <hr className="divider" />
+      <HowItWorks />
+      <hr className="divider" />
+      <AnatomySection />
+      <hr className="divider" />
+      <SecuritySection />
+      <hr className="divider" />
+      <TestimonialSection />
+      <Ticker />
+      <CTABanner onCTA={() => setPage('agent')} />
+      <Footer />
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+<div id="root"></div>
+</body>
+</html>

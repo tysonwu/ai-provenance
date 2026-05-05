@@ -1,0 +1,12 @@
+---
+description: Prefer Playwright MCP server over the cursor-ide-browser MCP server
+alwaysApply: true
+---
+
+# Browser automation
+
+Prioritize the **Playwright MCP** server over the embedded Cursor browser when browser actions are related (`user-Playwright`): `browser_navigate`, `browser_snapshot`, `browser_click`, `browser_take_screenshot`, etc. Read each tool’s JSON schema under the Playwright MCP folder before calling.
+
+**Do not** use the internal **cursor-ide-browser** MCP for those tasks unless the user explicitly asks for the in-IDE Simple Browser.
+
+Exception: if Playwright MCP is unavailable or fails to start, say so and fall back to the embedded Cursor browser.

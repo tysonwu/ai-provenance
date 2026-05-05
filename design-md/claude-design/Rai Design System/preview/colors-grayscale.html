@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { background: var(--bg1); padding: 20px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+  .sw {
+    aspect-ratio: 1 / 0.8;
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.16px;
+  }
+  .sw .name { font-weight: 600; }
+  .sw .hex { opacity: 0.75; }
+  .sw.on-dark { color: #fff; }
+  .sw.on-light { color: #161616; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="sw on-dark"  style="background:#161616"><span class="name">Gray 100</span><span class="hex">#161616</span></div>
+    <div class="sw on-dark"  style="background:#262626"><span class="name">Gray 90</span><span class="hex">#262626</span></div>
+    <div class="sw on-dark"  style="background:#393939"><span class="name">Gray 80</span><span class="hex">#393939</span></div>
+    <div class="sw on-dark"  style="background:#525252"><span class="name">Gray 70</span><span class="hex">#525252</span></div>
+    <div class="sw on-dark"  style="background:#6f6f6f"><span class="name">Gray 60</span><span class="hex">#6f6f6f</span></div>
+    <div class="sw on-light" style="background:#8d8d8d"><span class="name">Gray 50</span><span class="hex">#8d8d8d</span></div>
+    <div class="sw on-light" style="background:#c6c6c6"><span class="name">Gray 30</span><span class="hex">#c6c6c6</span></div>
+    <div class="sw on-light" style="background:#e0e0e0"><span class="name">Gray 20</span><span class="hex">#e0e0e0</span></div>
+    <div class="sw on-light" style="background:#f4f4f4"><span class="name">Gray 10</span><span class="hex">#f4f4f4</span></div>
+    <div class="sw on-light" style="background:#ffffff;box-shadow:inset 0 0 0 1px #e0e0e0"><span class="name">White</span><span class="hex">#ffffff</span></div>
+  </div>
+</body>
+</html>

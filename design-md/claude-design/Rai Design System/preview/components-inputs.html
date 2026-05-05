@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { background:#fff; padding: 20px 24px; color:#161616; font-family:var(--font-sans); display:grid; grid-template-columns:1fr 1fr; gap:28px; }
+  .label { font-size:10px; text-transform:uppercase; letter-spacing:0.32px; color:#525252; font-weight:600; margin-bottom:6px; }
+  .field { display:flex; flex-direction:column; gap:4px; }
+  .flab  { font-size:12px; letter-spacing:0.32px; color:#525252; font-weight:400; }
+  input, textarea {
+    background:#f4f4f4; border:0; border-bottom:2px solid transparent; border-radius:0;
+    height:40px; padding:0 16px; font-family:var(--font-sans); font-size:14px; letter-spacing:0.16px; color:#161616; outline:none;
+  }
+  input::placeholder, textarea::placeholder { color:#6f6f6f; }
+  input:focus { border-bottom-color:#0f62fe; }
+  input.error { border-bottom-color:#da1e28; }
+  textarea { padding:10px 16px; min-height:64px; resize:vertical; }
+  .helper { font-size:12px; color:#6f6f6f; letter-spacing:0.32px; }
+  .err    { font-size:12px; color:#da1e28; letter-spacing:0.32px; }
+</style>
+</head>
+<body>
+  <div class="field">
+    <div class="flab">Run label</div>
+    <input type="text" value="BTC funding · 09:00 UTC" />
+    <div class="helper">Shown in history and stats.</div>
+  </div>
+  <div class="field">
+    <div class="flab">User note</div>
+    <input type="text" placeholder="e.g. focus on BTC/ETH…" />
+    <div class="helper">Appended to base user message.</div>
+  </div>
+  <div class="field">
+    <div class="flab">API base (required)</div>
+    <input class="error" type="text" value="localhost" />
+    <div class="err">Must include protocol.</div>
+  </div>
+  <div class="field">
+    <div class="flab">Instructions</div>
+    <textarea placeholder="Optional additional instructions…"></textarea>
+  </div>
+</body>
+</html>

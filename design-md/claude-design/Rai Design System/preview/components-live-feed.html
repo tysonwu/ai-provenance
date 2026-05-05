@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; background:#121316; color:#eef0f7; font-family:var(--font-sans); }
+  .feed { box-shadow: inset 0 0 0 1px rgba(74,81,98,.15); background:#1b1e24; }
+  .h { padding: 8px 12px; display:flex; justify-content:space-between; align-items:center;
+       box-shadow: inset 0 -1px 0 rgba(74,81,98,.15); background:#252a32; }
+  .h .t { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.32px; color:#b4b8c8; }
+  .h .s { font-size:10px; color:#6f95ff; }
+  .body { padding:8px; display:flex; flex-direction:column; gap:6px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.16px; }
+  .round { border-left:2px solid #6f95ff; padding: 2px 8px; color:#b4b8c8; }
+  .round .a { color:#6f95ff; margin-right:6px; }
+  .tool { background:rgba(37,42,50,.55); padding: 5px 8px; display:flex; align-items:center; gap:8px; }
+  .tool .g { color:#b4b8c8; }
+  .tool .n { color:#eef0f7; }
+  .ok { color:#43c59c; padding: 2px 8px; display:flex; gap:8px; align-items:center; }
+  .ok .b { margin-left:auto; color:#b4b8c8; }
+  .llm { color:#6f95ff; padding: 2px 8px; display:flex; align-items:center; gap:8px; }
+  .pulse { width:6px; height:6px; background:#6f95ff; border-radius:50%; }
+  @keyframes p { 0%,100% { opacity:1 } 50% { opacity:.35 } }
+  .pulse, .s { animation: p 1.2s ease-in-out infinite; }
+</style>
+</head>
+<body>
+  <div class="feed">
+    <div class="h"><span class="t">▼ Live run</span><span class="s">streaming</span></div>
+    <div class="body">
+      <div class="round"><span class="a">●</span>Round 1</div>
+      <div class="llm"><span class="pulse"></span>Claude…</div>
+      <div class="tool"><span class="g">⎘</span><span class="n">fetch_funding_rates</span></div>
+      <div class="ok">✓ <span>fetch_funding_rates</span><span class="b">1,204 B</span></div>
+      <div class="round"><span class="a">●</span>Round 2</div>
+      <div class="tool"><span class="g">⎘</span><span class="n">list_positions</span></div>
+    </div>
+  </div>
+</body>
+</html>

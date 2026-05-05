@@ -1,0 +1,215 @@
+/* =============================================================================
+   Rai Design System — Colors + Type
+   -----------------------------------------------------------------------------
+   Light mode: IBM Carbon-inspired enterprise control panel.
+   Dark mode:  "Financial Architect" — high-contrast data surfaces, cobalt
+               highlights, no-line separation via tonal layering.
+
+   Typography: IBM Plex Sans (300/400/600) + IBM Plex Mono (400/600).
+   ============================================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;600&display=swap");
+
+/* ----- LIGHT (default) : IBM Carbon --------------------------------------- */
+:root {
+  color-scheme: light;
+
+  /* Carbon tokens — authoritative names used across the UI */
+  --cds-background: #ffffff;
+  --cds-layer-01: #f4f4f4;
+  --cds-layer-01-hover: #e8e8e8;
+  --cds-layer-02: #e0e0e0;
+  --cds-text-primary: #161616;
+  --cds-text-secondary: #525252;
+  --cds-text-placeholder: #6f6f6f;
+  --cds-border-subtle: #c6c6c6;
+  --cds-link-primary: #0f62fe;
+  --cds-link-primary-hover: #0043ce;
+  --cds-button-primary: #0f62fe;
+  --cds-button-primary-hover: #0353e9;
+  --cds-button-primary-active: #002d9c;
+  --cds-focus: #0f62fe;
+  --cds-focus-inset: #ffffff;
+  --cds-support-success: #24a148;
+  --cds-support-error: #da1e28;
+  --cds-support-warning: #f1c21b;
+  --cds-support-info: #0f62fe;
+  --cds-masthead: #161616;
+  --cds-masthead-text: #c6c6c6;
+  --cds-field: #f4f4f4;
+  --cds-placeholder: #6f6f6f;
+
+  /* Raw Carbon gray scale — for specimen/reference use */
+  --gray-100: #161616;
+  --gray-90:  #262626;
+  --gray-80:  #393939;
+  --gray-70:  #525252;
+  --gray-60:  #6f6f6f;
+  --gray-50:  #8d8d8d;
+  --gray-30:  #c6c6c6;
+  --gray-20:  #e0e0e0;
+  --gray-10:  #f4f4f4;
+
+  /* Raw Carbon blues */
+  --blue-10:  #edf5ff;
+  --blue-60:  #0f62fe;
+  --blue-70:  #0043ce;
+  --blue-80:  #002d9c;
+
+  /* Semantic aliases */
+  --fg1: var(--cds-text-primary);       /* primary headings + body */
+  --fg2: var(--cds-text-secondary);     /* secondary text, labels */
+  --fg3: var(--cds-text-placeholder);   /* placeholders, disabled */
+  --bg1: var(--cds-background);         /* canvas */
+  --bg2: var(--cds-layer-01);           /* cards, fields */
+  --bg3: var(--cds-layer-02);           /* elevated panels */
+  --border: var(--cds-border-subtle);
+  --accent: var(--cds-link-primary);
+  --accent-hover: var(--cds-link-primary-hover);
+  --ok:    var(--cds-support-success);
+  --err:   var(--cds-support-error);
+  --warn:  var(--cds-support-warning);
+
+  /* Fonts */
+  --font-sans:  "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:  "IBM Plex Mono", Menlo, Courier, monospace;
+  --font-serif: "IBM Plex Serif", Georgia, serif;
+
+  /* Type scale (Carbon expressive + productive) */
+  --type-display-01: 60px / 1.17 var(--font-sans); /* weight 300 */
+  --type-display-02: 48px / 1.17 var(--font-sans); /* weight 300 */
+  --type-h1: 42px / 1.19 var(--font-sans);         /* weight 300 */
+  --type-h2: 32px / 1.25 var(--font-sans);         /* weight 400 */
+  --type-h3: 24px / 1.33 var(--font-sans);         /* weight 400 */
+  --type-h4: 20px / 1.40 var(--font-sans);         /* weight 600 */
+  --type-h5: 20px / 1.40 var(--font-sans);         /* weight 400 */
+  --type-body-long-01:  16px / 1.50 var(--font-sans);
+  --type-body-long-02:  16px / 1.50 var(--font-sans); /* weight 600 */
+  --type-body-short-01: 14px / 1.29 var(--font-sans); /* 0.16px tracking */
+  --type-body-short-02: 14px / 1.29 var(--font-sans); /* 600, 0.16px */
+  --type-caption-01:    12px / 1.33 var(--font-sans); /* 0.32px tracking */
+  --type-code-01:       14px / 1.43 var(--font-mono); /* 0.16px */
+  --type-code-02:       16px / 1.50 var(--font-mono);
+
+  /* Spacing (Carbon 2x grid) */
+  --space-01: 2px;
+  --space-02: 4px;
+  --space-03: 8px;
+  --space-04: 12px;
+  --space-05: 16px;
+  --space-06: 24px;
+  --space-07: 32px;
+  --space-08: 40px;
+  --space-09: 48px;
+  --space-10: 64px;
+  --space-11: 80px;
+  --space-12: 96px;
+  --space-13: 160px;
+
+  /* Radius — rectangular by default */
+  --radius-0: 0;
+  --radius-sm: 2px;   /* small elements rarely */
+  --radius-pill: 24px; /* tags only */
+  --radius-round: 50%;
+
+  /* Shadows — reserved for floating overlays only */
+  --shadow-raised:  0 2px 6px rgba(0, 0, 0, 0.30);
+  --shadow-overlay: 0 2px 6px rgba(0, 0, 0, 0.30);
+
+  /* Interactive sizing */
+  --size-button: 48px;
+  --size-button-compact: 40px;
+  --size-button-xl: 64px;
+  --size-field: 40px;
+  --size-field-lg: 48px;
+  --size-masthead: 48px;
+}
+
+/* ----- DARK : Financial Architect overlay --------------------------------- */
+html.dark,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --cds-background: #121316;
+  --cds-layer-01: #1b1e24;
+  --cds-layer-01-hover: #252a32;
+  --cds-layer-02: #0f1115;
+  --cds-text-primary: #eef0f7;
+  --cds-text-secondary: #b4b8c8;
+  --cds-text-placeholder: #8e93a5;
+  --cds-border-subtle: #4a5162;
+  --cds-link-primary: #6f95ff;
+  --cds-link-primary-hover: #9db5ff;
+  --cds-button-primary: #0f62fe;
+  --cds-button-primary-hover: #0353e9;
+  --cds-button-primary-active: #002d9c;
+  --cds-focus: #6f95ff;
+  --cds-focus-inset: #121316;
+  --cds-support-success: #43c59c;
+  --cds-support-error: #ff8e8e;
+  --cds-support-warning: #e4b258;
+  --cds-support-info: #6f95ff;
+  --cds-masthead: color-mix(in srgb, #121316 84%, #1f2230 16%);
+  --cds-masthead-text: #c5cadb;
+  --cds-field: #20242d;
+  --cds-placeholder: #8e93a5;
+
+  /* Shadows vanish in dark mode — tonal layering does the work */
+  --shadow-raised:  0 2px 6px rgba(0, 0, 0, 0.55);
+  --shadow-overlay: 0 8px 24px rgba(0, 0, 0, 0.65);
+}
+
+/* ----- Base element styles ------------------------------------------------ */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--cds-background);
+  color: var(--cds-text-primary);
+  font: var(--type-body-short-01);
+  letter-spacing: 0.16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings — map to Carbon expressive scale */
+h1 { font: var(--type-h1); font-weight: 300; margin: 0; color: var(--fg1); }
+h2 { font: var(--type-h2); font-weight: 400; margin: 0; color: var(--fg1); }
+h3 { font: var(--type-h3); font-weight: 400; margin: 0; color: var(--fg1); }
+h4 { font: var(--type-h4); font-weight: 600; margin: 0; color: var(--fg1); }
+h5 { font: var(--type-h5); font-weight: 400; margin: 0; color: var(--fg1); }
+
+/* Display classes for hero/marquee use */
+.display-01 { font: var(--type-display-01); font-weight: 300; letter-spacing: 0; }
+.display-02 { font: var(--type-display-02); font-weight: 300; letter-spacing: 0; }
+
+p { font: var(--type-body-long-01); margin: 0 0 var(--space-05); color: var(--fg1); }
+
+small, .caption {
+  font: var(--type-caption-01);
+  letter-spacing: 0.32px;
+  color: var(--fg2);
+}
+
+code, pre, .mono {
+  font-family: var(--font-mono);
+  letter-spacing: 0.16px;
+}
+
+a {
+  color: var(--cds-link-primary);
+  text-decoration: none;
+}
+a:hover { color: var(--cds-link-primary-hover); text-decoration: underline; }
+
+/* ----- Utility classes ---------------------------------------------------- */
+.tracking-caption { letter-spacing: 0.32px; }
+.tracking-body    { letter-spacing: 0.16px; }
+.tracking-display { letter-spacing: 0; }
+
+.upper-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.32px;
+  text-transform: uppercase;
+  color: var(--fg2);
+}

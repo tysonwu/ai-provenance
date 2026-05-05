@@ -1,0 +1,15 @@
+---
+description: Writing style rule for AI-generated artifacts and articles
+alwaysApply: true
+---
+
+# AI writing rules (global)
+
+## Dash rule
+
+- **Never** use the em dash `—` unless unavoidable.
+- If a dash is unavoidable, use the ASCII hyphen-minus `-` (Unicode U+002D), not `—`.
+
+## Long-form rule
+
+- For long article writing or explanatory Markdown, use the `/article-writing` skill if available.

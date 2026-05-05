@@ -1,0 +1,10 @@
+---
+description: A general guideline on code hygiene
+alwaysApply: true
+---
+
+# Code hygiene
+
+## No hard-coded user or machine paths
+
+**Never** put a specific developer's filesystem layout into the repo: READMEs, example shell snippets, comments, config templates, test fixtures, or copy-paste instructions. Machine-specific roots (especially home directories) must not appear in committed content. Prefer **repo-relative** steps, **environment variables**, or **placeholders** (`<path-to-clone>`, `$REPO_ROOT`).

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greptile — App Dashboard UI Kit</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Anybody:ital,wght@1,700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body, #root { height: 100%; }
+    body { font-family: 'DM Sans', sans-serif; color: #2A2A2A; background: #EEEEEE; overflow: hidden; }
+  </style>
+</head>
+<body>
+<script type="text/babel" src="Sidebar.jsx"></script>
+<script type="text/babel" src="PRReviewCard.jsx"></script>
+<script type="text/babel" src="ReviewComment.jsx"></script>
+
+<script type="text/babel">
+const { useState } = React;
+
+const MOCK_PRS = [
+  { id: 1, title: 'feat: Add OAuth2 token refresh logic with exponential backoff', repo: 'brex/backend', author: 'alice', branch: 'feat/oauth-refresh', score: 2, comments: 4, status: 'reviewed', timeAgo: '12m ago' },
+  { id: 2, title: 'refactor: Migrate user service to async/await pattern', repo: 'brex/backend', author: 'bob', branch: 'refactor/user-async', score: 4, comments: 1, status: 'reviewed', timeAgo: '1h ago' },
+  { id: 3, title: 'fix: Resolve race condition in payment processing pipeline', repo: 'brex/payments', author: 'carol', branch: 'fix/payment-race', score: 1, comments: 7, status: 'pending', timeAgo: '2h ago' },
+  { id: 4, title: 'chore: Update dependencies to latest stable versions', repo: 'brex/frontend', author: 'dave', branch: 'chore/deps-update', score: 5, comments: 0, status: 'merged', timeAgo: '3h ago' },
+  { id: 5, title: 'feat: Implement real-time expense categorization with ML model', repo: 'brex/ml', author: 'eve', branch: 'feat/ml-categorize', score: 3, comments: 3, status: 'reviewed', timeAgo: '5h ago' },
+];
+
+const MOCK_COMMENTS = [
+  { id: 1, severity: 'high', file: 'src/auth/token.ts', line: 147, type: 'security', message: 'The refresh token is stored in localStorage, which exposes it to XSS attacks. Consider using httpOnly cookies for token storage instead.', canFix: true },
+  { id: 2, severity: 'high', file: 'src/auth/token.ts', line: 203, type: 'logic', message: 'The exponential backoff implementation doesn\'t cap the maximum delay. After ~12 retries the delay exceeds 2^32ms, causing integer overflow. Add a maxDelay parameter.', canFix: true },
+  { id: 3, severity: 'medium', file: 'src/auth/refresh.ts', line: 89, type: 'performance', message: 'refreshToken() is called on every API request even when the token is still valid. Cache the expiry time and only refresh when within 60s of expiration.', canFix: true },
+  { id: 4, severity: 'low', file: 'src/auth/token.ts', line: 55, type: 'style', message: 'Variable name `t` is ambiguous. Based on your team\'s conventions in auth/session.ts, prefer descriptive names like `accessToken`.', canFix: false },
+];
+
+// Confidence ring component
+const ConfidenceRing = ({ score }) => {
+  const color = confidenceColor(score);
+  const pct = (score / 5) * 100;
+  const r = 20, c = 2 * Math.PI * r;
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
+      <svg width="52" height="52" viewBox="0 0 52 52">
+        <circle cx="26" cy="26" r={r} fill="none" stroke="#E9E9E9" strokeWidth="4"/>
+        <circle cx="26" cy="26" r={r} fill="none" stroke={color} strokeWidth="4"
+          strokeDasharray={c} strokeDashoffset={c - (pct / 100) * c}
+          strokeLinecap="round" transform="rotate(-90 26 26)"/>
+        <text x="26" y="31" textAnchor="middle" fontFamily="'DM Sans',sans-serif" fontSize="14" fontWeight="700" fill="#2A2A2A">{score}</text>
+      </svg>
+      <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, color: '#787878', textTransform: 'uppercase', letterSpacing: '0.08em' }}>confidence</span>
+    </div>
+  );
+};
+
+// PR Detail panel
+const PRDetail = ({ pr, onBack }) => (
+  <div style={{ flex: 1, height: '100vh', overflow: 'auto', background: '#EEEEEE' }}>
+    {/* Top bar */}
+    <div style={{ background: '#F9F7F3', borderBottom: '1px solid rgba(85,83,104,0.12)', padding: '12px 28px', display: 'flex', alignItems: 'center', gap: 12 }}>
+      <button onClick={onBack} style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: '#555368', background: 'transparent', border: 'none', cursor: 'pointer', padding: '4px 0' }}>← Back</button>
+      <div style={{ width: 1, height: 16, background: 'rgba(85,83,104,0.2)' }}></div>
+      <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 10, color: '#787878', textTransform: 'uppercase', letterSpacing: '0.08em' }}>{pr.repo}</span>
+      <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 14, fontWeight: 600, color: '#2A2A2A', flex: 1 }}>{pr.title}</span>
+      <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 10, color: '#555368', background: 'rgba(85,83,104,0.08)', padding: '4px 10px', borderRadius: 4 }}>⎇ {pr.branch}</span>
+    </div>
+
+    <div style={{ padding: '24px 28px', display: 'grid', gridTemplateColumns: '1fr 220px', gap: 20 }}>
+      {/* Comments column */}
+      <div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
+          <span style={{ fontFamily: "'DM Sans',sans-serif", fontWeight: 600, fontSize: 15, color: '#2A2A2A' }}>Review Comments ({MOCK_COMMENTS.length})</span>
+          <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 10, color: '#555368', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Sort by severity</span>
+        </div>
+        {MOCK_COMMENTS.map(c => <ReviewComment key={c.id} comment={c} />)}
+      </div>
+
+      {/* Sidebar stats */}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <div style={{ background: '#F9F7F3', borderRadius: 10, padding: '20px', border: '1px solid rgba(85,83,104,0.1)', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
+          <ConfidenceRing score={pr.score} />
+          <div style={{ width: '100%', borderTop: '1px solid rgba(85,83,104,0.1)', paddingTop: 14 }}>
+            {[{label:'Files changed', val:'8'},{label:'Lines added',val:'+247'},{label:'Lines removed',val:'-63'},{label:'Comments',val:pr.comments}].map(s => (
+              <div key={s.label} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+                <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: '#787878' }}>{s.label}</span>
+                <span style={{ fontFamily: "'Space Mono',monospace", fontSize: 11, fontWeight: 700, color: '#2A2A2A' }}>{s.val}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div style={{ background: '#F9F7F3', borderRadius: 10, padding: '16px', border: '1px solid rgba(85,83,104,0.1)' }}>
+          <div style={{ fontFamily: "'Space Mono',monospace", fontSize: 9, color: '#555368', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10 }}>Issue breakdown</div>
+          {[{label:'Security',count:1,color:'#FFBCB3',text:'#E5443D'},{label:'Logic',count:1,color:'#FFBCB3',text:'#E5443D'},{label:'Performance',count:1,color:'#FFBCB3',text:'#FF7F59'},{label:'Style',count:1,color:'#E9E9E9',text:'#555368'}].map(b => (
+            <div key={b.label} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+              <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 11, fontWeight: 600, background: b.color, color: b.text, padding: '1px 7px', borderRadius: 9999 }}>{b.count}</span>
+              <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: '#555368' }}>{b.label}</span>
+            </div>
+          ))}
+        </div>
+        <button style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, fontWeight: 600, color: '#2A2A2A', background: '#28E99F', border: 'none', borderRadius: 8, padding: '10px', cursor: 'pointer' }}>
+          Approve &amp; Merge
+        </button>
+      </div>
+    </div>
+  </div>
+);
+
+// Dashboard view
+const Dashboard = ({ onSelect }) => (
+  <div style={{ flex: 1, height: '100vh', overflow: 'auto' }}>
+    <div style={{ background: '#F9F7F3', borderBottom: '1px solid rgba(85,83,104,0.12)', padding: '16px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <div>
+        <div style={{ fontFamily: "'Space Mono',monospace", fontSize: 10, color: '#787878', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>[ DASHBOARD ]</div>
+        <h1 style={{ fontFamily: "'DM Sans',sans-serif", fontWeight: 700, fontSize: 22, color: '#2A2A2A', letterSpacing: '-0.02em' }}>PR Reviews</h1>
+      </div>
+      <div style={{ display: 'flex', gap: 10 }}>
+        <div style={{ fontFamily: "'Space Mono',monospace", fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#555368', background: '#EEEEEE', border: '1px solid rgba(85,83,104,0.2)', borderRadius: 6, padding: '7px 14px', cursor: 'pointer' }}>Filter</div>
+      </div>
+    </div>
+    {/* Stats strip */}
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 0, borderBottom: '1px solid rgba(85,83,104,0.12)', background: '#F9F7F3' }}>
+      {[{label:'Total Reviews',val:'247',sub:'this month'},{label:'Bugs Caught',val:'38',sub:'high severity'},{label:'Avg. Confidence',val:'3.8',sub:'out of 5'},{label:'Time Saved',val:'14h',sub:'est. this week'}].map((s, i) => (
+        <div key={s.label} style={{ padding: '16px 28px', borderRight: i < 3 ? '1px solid rgba(85,83,104,0.12)' : 'none' }}>
+          <div style={{ fontFamily: "'DM Sans',sans-serif", fontWeight: 700, fontSize: 26, color: '#2A2A2A', letterSpacing: '-0.02em' }}>{s.val}</div>
+          <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 12, color: '#2A2A2A', fontWeight: 600 }}>{s.label}</div>
+          <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: 11, color: '#787878' }}>{s.sub}</div>
+        </div>
+      ))}
+    </div>
+    <div style={{ padding: '20px 28px' }}>
+      {MOCK_PRS.map(pr => <PRReviewCard key={pr.id} pr={pr} onClick={() => onSelect(pr)} />)}
+    </div>
+  </div>
+);
+
+const App = () => {
+  const [page, setPage] = useState('dashboard');
+  const [selectedPR, setSelectedPR] = useState(null);
+
+  const handleSelect = (pr) => { setSelectedPR(pr); setPage('detail'); };
+  const handleBack = () => { setPage('dashboard'); setSelectedPR(null); };
+
+  return (
+    <div style={{ display: 'flex', height: '100vh', overflow: 'hidden' }}>
+      <Sidebar activePage={page === 'detail' ? 'reviews' : 'dashboard'} onNav={(p) => { setPage(p); setSelectedPR(null); }} />
+      {page === 'detail' && selectedPR
+        ? <PRDetail pr={selectedPR} onBack={handleBack} />
+        : <Dashboard onSelect={handleSelect} />
+      }
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+<div id="root"></div>
+</body>
+</html>

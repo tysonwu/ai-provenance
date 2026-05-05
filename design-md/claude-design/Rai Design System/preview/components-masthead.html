@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; background:#fff; color:#161616; font-family:var(--font-sans); }
+  .mast { background:#161616; color:#c6c6c6; height:48px; display:flex; align-items:center; padding: 0 24px; gap:24px; justify-content:space-between; }
+  .lockup { display:flex; align-items:center; gap:12px; }
+  .lockup svg { color:#fff; }
+  .wm { color:#fff; font-size:20px; font-weight:300; letter-spacing:0; }
+  .nav { display:flex; gap:20px; font-size:14px; letter-spacing:0.16px; }
+  .nav a { color:#c6c6c6; text-decoration:none; padding:0 4px; height:48px; display:flex; align-items:center; }
+  .nav a.active { color:#fff; box-shadow: inset 0 -2px 0 #fff; }
+  .nav a:hover { color:#fff; }
+  .right { display:flex; align-items:center; gap:12px; font-size:12px; letter-spacing:0.32px; color:#c6c6c6; }
+  .dot { width:8px; height:8px; border-radius:50%; background:#24a148; }
+  .foot { background:#161616; color:#c6c6c6; height:32px; display:flex; align-items:center; justify-content:space-between; padding:0 24px; font-size:11px; font-family:var(--font-mono); letter-spacing:0.16px; }
+</style>
+</head>
+<body>
+  <div class="mast">
+    <div class="lockup">
+      <svg width="22" height="22" viewBox="0 0 100 100"><polygon points="50,12 82.909,31 82.909,69 50,88 17.091,69 17.091,31" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/></svg>
+      <span class="wm">Rai</span>
+    </div>
+    <div class="nav">
+      <a class="active">Briefings</a><a>Runs</a><a>Skills</a><a>Logs</a>
+    </div>
+    <div class="right">
+      <span>Last run 2m ago</span>
+      <span class="dot"></span>
+      <span>Connected</span>
+    </div>
+  </div>
+  <div class="foot">
+    <span>rai · autonomous · claude-haiku-4-5</span>
+    <span>http://localhost:3510</span>
+  </div>
+</body>
+</html>

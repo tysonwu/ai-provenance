@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { background: var(--bg1); padding: 20px; }
+  .label { font-size:10px; text-transform:uppercase; letter-spacing:0.32px; color:var(--fg2); margin-bottom:10px; font-weight:600; }
+  .row { display:flex; gap:1px; background:var(--border); }
+  .sw  { flex:1; padding:14px; font-family:var(--font-mono); font-size:10px; color:#fff;
+         display:flex; flex-direction:column; gap:4px; min-height:72px; justify-content:space-between; }
+  .sw .name { font-weight:600; letter-spacing:0.16px; }
+  .sw .role { font-family:var(--font-sans); font-size:11px; opacity:.95; }
+  .sw .hex  { opacity:.8; }
+  .split { display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+</style>
+</head>
+<body>
+  <div class="split">
+    <div>
+      <div class="label">Support · light mode</div>
+      <div class="row">
+        <div class="sw" style="background:#24a148"><span class="name">Green 50</span><span class="role">success</span><span class="hex">#24a148</span></div>
+        <div class="sw" style="background:#da1e28"><span class="name">Red 60</span><span class="role">error / danger</span><span class="hex">#da1e28</span></div>
+        <div class="sw" style="background:#f1c21b; color:#161616"><span class="name">Yellow 30</span><span class="role">warning</span><span class="hex">#f1c21b</span></div>
+      </div>
+    </div>
+    <div>
+      <div class="label">Support · dark mode</div>
+      <div class="row">
+        <div class="sw" style="background:#43c59c; color:#0b1410"><span class="name">Fin Green</span><span class="role">success</span><span class="hex">#43c59c</span></div>
+        <div class="sw" style="background:#ff8e8e; color:#3b0b0b"><span class="name">Risk Red</span><span class="role">error</span><span class="hex">#ff8e8e</span></div>
+        <div class="sw" style="background:#e4b258; color:#2b1e0a"><span class="name">Caution</span><span class="role">warning</span><span class="hex">#e4b258</span></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

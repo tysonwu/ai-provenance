@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=Space+Mono&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #EEEEEE; padding: 20px 24px; font-family: 'DM Sans', sans-serif; display: flex; flex-wrap: wrap; gap: 12px; }
+  .label { font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: #555368; width: 100%; margin-bottom: 2px; }
+  .tile { border-radius: 10px; overflow: hidden; width: 160px; height: 100px; position: relative; display: flex; align-items: flex-end; }
+  .tile-label { font-family: 'Space Mono', monospace; font-size: 9px; color: rgba(255,255,255,0.7); padding: 6px 8px; background: rgba(0,0,0,0.3); width: 100%; }
+  .tile-label-dark { font-family: 'Space Mono', monospace; font-size: 9px; color: #555368; padding: 6px 8px; background: rgba(0,0,0,0.05); width: 100%; }
+  /* Noise BG */
+  .bg-noise { background-color: #EEEEEE; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"); }
+  /* Ticker strip */
+  .ticker { background: #2A2A2A; width: 100%; padding: 10px 0; overflow: hidden; white-space: nowrap; }
+  .ticker-inner { display: inline-block; animation: ticker 8s linear infinite; font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 0.08em; color: rgba(238,238,238,0.6); }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  /* Graph pattern approximation */
+  .bg-graph { background: #EEEEEE; position: relative; }
+  .bg-graph::before { content: ''; position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, rgba(85,83,104,0.08) 0px, rgba(85,83,104,0.08) 1px, transparent 1px, transparent 32px), repeating-linear-gradient(90deg, rgba(85,83,104,0.08) 0px, rgba(85,83,104,0.08) 1px, transparent 1px, transparent 32px); }
+  /* Dark section */
+  .bg-dark { background: #2A2A2A; }
+</style>
+</head>
+<body>
+<div class="label">[ Background Patterns ]</div>
+<div class="tile bg-noise"><div class="tile-label-dark">bg-noise — #EEEEEE + grain</div></div>
+<div class="tile bg-graph"><div class="tile-label-dark">Graph grid pattern</div></div>
+<div class="tile bg-dark"><div class="tile-label">Dark section #2A2A2A</div></div>
+<div class="tile" style="background:#F9F7F3;"><div class="tile-label-dark">Warm white card surface</div></div>
+<div class="label" style="margin-top:8px;">[ Ticker / Marquee Strip ]</div>
+<div style="width:100%; border-radius:8px; overflow:hidden;">
+  <div class="ticker">
+    <span class="ticker-inner">TEST · RUN · EXECUTE &nbsp;&nbsp; TEST · RUN · EXECUTE &nbsp;&nbsp; TEST · RUN · EXECUTE &nbsp;&nbsp; TEST · RUN · EXECUTE &nbsp;&nbsp; TEST · RUN · EXECUTE &nbsp;&nbsp; TEST · RUN · EXECUTE &nbsp;&nbsp;</span>
+  </div>
+</div>
+</body>
+</html>

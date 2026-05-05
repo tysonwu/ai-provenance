@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { background:#fff; padding: 20px 24px; color:#161616; font-family:var(--font-sans); }
+  .label { font-size:10px; text-transform:uppercase; letter-spacing:0.32px; color:#525252; margin-bottom:14px; font-weight:600; }
+  .grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .r { display:flex; flex-direction:column; gap:8px; align-items:center; }
+  .chip { width:78px; height:48px; background:#0f62fe; }
+  .v { font-family:var(--font-mono); font-size:10px; color:#525252; letter-spacing:0.16px; }
+  .name { font-size:11px; color:#161616; }
+</style>
+</head>
+<body>
+  <div class="label">Corner radius · rectangles are the system</div>
+  <div class="grid">
+    <div class="r"><div class="chip" style="border-radius:0"></div><div class="name">0 · default</div><div class="v">buttons · cards · inputs</div></div>
+    <div class="r"><div class="chip" style="border-radius:2px"></div><div class="name">2px · rare</div><div class="v">small interactives</div></div>
+    <div class="r"><div class="chip" style="border-radius:24px; width:72px; height:22px; background:#edf5ff; color:#0f62fe; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:400;">pill</div><div class="name">24px · tags</div><div class="v">the only rounded exception</div></div>
+    <div class="r"><div class="chip" style="border-radius:50%; width:40px; height:40px;"></div><div class="name">50% · avatars</div><div class="v">circles for faces + icons</div></div>
+  </div>
+</body>
+</html>

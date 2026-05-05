@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #EEEEEE; padding: 20px 24px; font-family: 'DM Sans', sans-serif; display: flex; gap: 14px; flex-wrap: wrap; }
+  .section-label { width: 100%; font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: #555368; margin-bottom: 4px; }
+  /* Base card */
+  .card { background: #F9F7F3; border-radius: 12px; padding: 18px; width: 180px; }
+  .card-title { font-size: 14px; font-weight: 600; color: #2A2A2A; margin-bottom: 4px; }
+  .card-body { font-size: 12px; color: #555368; line-height: 1.5; }
+  /* Feature card with number */
+  .card-feature { background: #F9F7F3; border-radius: 12px; padding: 16px 18px; width: 180px; }
+  .card-num { font-family: 'Space Mono', monospace; font-size: 10px; color: #555368; margin-bottom: 8px; }
+  /* Testimonial card */
+  .card-testimonial { background: #F9F7F3; border-radius: 12px; padding: 18px; width: 220px; }
+  .card-quote { font-size: 13px; color: #2A2A2A; line-height: 1.55; font-style: italic; margin-bottom: 12px; }
+  .card-author { display: flex; align-items: center; gap: 8px; }
+  .avatar { width: 28px; height: 28px; border-radius: 50%; background: #D6D6D6; }
+  .author-name { font-size: 11px; font-weight: 600; color: #2A2A2A; }
+  .author-role { font-size: 10px; color: #555368; }
+  /* Accent card */
+  .card-accent { background: #2A2A2A; border-radius: 12px; padding: 18px; width: 180px; }
+  .card-accent .card-title { color: #EEEEEE; }
+  .card-accent .card-body { color: rgba(238,238,238,0.6); }
+  /* Stat card */
+  .card-stat { background: #F9F7F3; border-radius: 12px; padding: 16px 18px; width: 120px; text-align: center; }
+  .stat-num { font-size: 32px; font-weight: 700; color: #28E99F; letter-spacing: -0.02em; line-height: 1; }
+  .stat-label { font-size: 11px; color: #555368; margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="section-label">[ Card Variants ]</div>
+<div class="card">
+  <div class="card-title">Base Card</div>
+  <div class="card-body">Standard content card with warm white background.</div>
+</div>
+<div class="card-feature">
+  <div class="card-num">01</div>
+  <div class="card-title">Feature Card</div>
+  <div class="card-body">Numbered feature step with minimal decoration.</div>
+</div>
+<div class="card-accent">
+  <div class="card-title">Dark Card</div>
+  <div class="card-body">High-contrast dark surface for emphasis sections.</div>
+</div>
+<div class="card-testimonial">
+  <div class="card-quote">"The only AI reviewer that doesn't annoy the s**t out of me."</div>
+  <div class="card-author">
+    <div class="avatar"></div>
+    <div><div class="author-name">James Reggio</div><div class="author-role">CTO · Brex</div></div>
+  </div>
+</div>
+<div class="card-stat"><div class="stat-num">4X</div><div class="stat-label">Faster merges</div></div>
+<div class="card-stat"><div class="stat-num">9k+</div><div class="stat-label">Teams using</div></div>
+</body>
+</html>

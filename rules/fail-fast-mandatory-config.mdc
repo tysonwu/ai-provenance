@@ -1,0 +1,68 @@
+---
+description: Fail fast on missing mandatory config and critical values — never substitute silent fallbacks that let broken state propagate
+globs: **/*.py
+alwaysApply: true
+---
+
+# Fail Fast on Mandatory Config and Critical Values
+
+**If a value is required for correctness, its absence must raise immediately. Never let "it runs anyway" be a design goal.**
+
+A silent fallback (`0.0`, `""`, `False`) trades a clear startup error for silent mispricing at runtime. In a trading strategy the cost of a wrong position vastly exceeds the cost of a hard exit.
+
+- Mandatory env vars: check with `raise` / `SystemExit` at load time, never `os.getenv("KEY", "")`.
+- Call `load_dotenv()` **before** `argparse` so `default=os.getenv(...)` in arg definitions sees real values.
+- Use `dict.get(k, default)` only when absence is explicitly expected and handled; prefer `msg["key"]` so `KeyError` points straight to schema bugs.
+- Functions that produce no result return `None`, not a plausible numeric default like `0.0`.
+- Initialise unready pricing/calibration state as `None`, not a plausible number; guard with `if self._state is None: return` at evaluation time.
+- In `except` clauses, distinguish known transient infra errors (set state to `None`, skip window) from unexpected errors (let them propagate and crash loudly).
+
+## Mandatory env vars — raise at load time
+
+```python
+# ❌ token = os.getenv("INFLUX_TOKEN", "")  →  strategy runs with bias=0.0
+# ✅
+token = os.getenv("INFLUX_TOKEN")
+if not token:
+    raise SystemExit("INFLUX_TOKEN is required. Set it in .env or the environment.")
+```
+
+Always call `load_dotenv()` **before** `argparse` so `default=os.getenv(...)` in arg definitions sees real values.
+
+## `dict.get()` only when absence is expected
+
+```python
+# ❌ price = msg.get("price", 0.0)   — masks schema bugs
+# ✅ price = msg["price"]             — KeyError points straight to the bug
+```
+
+## Functions with no result return `None`, not a fake numeric default
+
+```python
+# ❌ return 0.0   — caller cannot tell "no data" from "zero bias"
+# ✅ return None  — caller must handle explicitly
+```
+
+## Pricing state initialised as `None`, not a plausible number
+
+```python
+# ❌ self._chainlink_bias: float = 0.0
+# ✅ self._chainlink_bias: float | None = None
+# evaluation loop: if self._chainlink_bias is None: return  (skip, don't trade)
+```
+
+## Broad except — distinguish transient infra from programming errors
+
+```python
+# ❌ except Exception: log.warning(...); return 0.0
+# ✅ except KnownTransientError: set state to None, skip window
+#    let unexpected exceptions propagate and crash loudly
+```
+
+## Checklist
+
+- [ ] Every required env var checked with `raise`/`SystemExit` at startup
+- [ ] `dict.get(k, default)` only where absence is documented and handled
+- [ ] Calibration / fetch functions return `None` on data absence, not `0.0`
+- [ ] Strategy state for unready inputs typed as `Optional`, guarded at eval time
+- [ ] `load_dotenv()` called before `argparse` / before any `os.getenv()` reads

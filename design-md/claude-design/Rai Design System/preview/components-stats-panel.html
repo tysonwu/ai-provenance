@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { background:#fff; padding:20px 24px; color:#161616; font-family:var(--font-sans); }
+  .panel { background:#f4f4f4; padding: 14px 16px; border:1px solid rgba(198,198,198,.85); }
+  .label { font-size:10px; text-transform:uppercase; letter-spacing:0.32px; color:#525252; font-weight:600; margin-bottom:10px; }
+  .row { display:flex; justify-content:space-between; font-size:14px; letter-spacing:0.16px; padding: 3px 0; }
+  .row .k { color:#525252; }
+  .row .v { color:#161616; font-variant-numeric: tabular-nums; }
+  .row .v.accent { color:#0f62fe; font-weight:600; }
+  .row .mono { font-family: var(--font-mono); color:#525252; }
+</style>
+</head>
+<body>
+  <div class="panel">
+    <div class="label">Run stats</div>
+    <div class="row"><span class="k">Model</span><span class="v">haiku-4-5</span></div>
+    <div class="row"><span class="k">Duration</span><span class="v">1.4s</span></div>
+    <div class="row"><span class="k">Tool calls</span><span class="v accent">7</span></div>
+    <div class="row"><span class="k">Tokens in</span><span class="v">12,481</span></div>
+    <div class="row"><span class="k">Tokens out</span><span class="v">2,103</span></div>
+    <div class="row"><span class="k">Run ID</span><span class="v mono">8f3c1a</span></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { background:#fff; padding:20px 24px; color:#161616; font-family:var(--font-sans); display:flex; flex-direction:column; gap:14px; }
+  .label { font-size:10px; text-transform:uppercase; letter-spacing:0.32px; color:#525252; font-weight:600; }
+  .brand { display:flex; gap:20px; align-items:center; }
+  .hex { width:72px; height:72px; color:#161616; }
+  .lockup { display:flex; flex-direction:column; gap:4px; }
+  .name { font-size:32px; font-weight:300; color:#161616; letter-spacing:0; line-height:1.1; }
+  .tag  { font-size:11px; font-family:var(--font-mono); color:#525252; letter-spacing:0.16px; }
+  .invert { background:#161616; padding:14px 16px; display:inline-flex; gap:14px; align-items:center; }
+  .invert .hex { color:#fff; width:28px; height:28px; }
+  .invert .n { color:#fff; font-size:16px; font-weight:300; }
+</style>
+</head>
+<body>
+  <div class="label">Logo · hexagon + Plex 300 lockup</div>
+  <div class="brand">
+    <svg class="hex" viewBox="0 0 100 100"><polygon points="50,12 82.909,31 82.909,69 50,88 17.091,69 17.091,31" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/></svg>
+    <div class="lockup">
+      <div class="name">Rai</div>
+      <div class="tag">24/7 agent control panel</div>
+    </div>
+    <div class="invert">
+      <svg class="hex" viewBox="0 0 100 100"><polygon points="50,12 82.909,31 82.909,69 50,88 17.091,69 17.091,31" fill="none" stroke="currentColor" stroke-width="12" stroke-linejoin="round"/></svg>
+      <div class="n">Rai</div>
+    </div>
+  </div>
+</body>
+</html>

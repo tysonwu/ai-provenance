@@ -1,0 +1,14 @@
+---
+description: Apply when writing, generating, or extending any script (Python, TypeScript, shell, etc.) — enforces no unsolicited CLI flags, preferring top-of-file config variables over argparse/yargs/getopts flag proliferation
+alwaysApply: true
+---
+
+Look for the skill file `/cli-script-writing` if the task is related to writing up new scripts, regardless of what language it is.
+
+# No Flag Spam in Scripts
+
+**Never add CLI flags or options that weren't explicitly requested.** Every flag you add must be justified by the caller's actual need — not by an imagined future convenience.
+
+## The test
+
+> If removing this flag would make the code shorter and clearer, it shouldn't exist.

@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { background: var(--bg1); padding: 20px; }
+  .row { display:flex; gap:1px; background:var(--border); margin-bottom: 14px; }
+  .sw { flex:1; padding:14px 14px; font-family:var(--font-mono); font-size:10px; letter-spacing:0.16px;
+        display:flex; flex-direction:column; gap:4px; min-height:70px; justify-content:space-between; }
+  .sw .name { font-weight:600; }
+  .sw .hex  { opacity:0.8; }
+  .sw .role { font-family: var(--font-sans); font-size:11px; opacity:0.9; }
+  .on-dark { color:#fff; }
+  .on-light { color:#161616; }
+  .label { font-size:10px; text-transform:uppercase; letter-spacing:0.32px; color:var(--fg2); margin-bottom:6px; font-weight:600; }
+</style>
+</head>
+<body>
+  <div class="label">Primary · the sole chromatic accent</div>
+  <div class="row">
+    <div class="sw on-light" style="background:#edf5ff"><span class="name">Blue 10</span><span class="role">tint surface</span><span class="hex">#edf5ff</span></div>
+    <div class="sw on-dark"  style="background:#0f62fe"><span class="name">Blue 60</span><span class="role">primary accent</span><span class="hex">#0f62fe</span></div>
+    <div class="sw on-dark"  style="background:#0043ce"><span class="name">Blue 70</span><span class="role">link hover</span><span class="hex">#0043ce</span></div>
+    <div class="sw on-dark"  style="background:#002d9c"><span class="name">Blue 80</span><span class="role">pressed / active</span><span class="hex">#002d9c</span></div>
+  </div>
+  <div class="label">Dark-mode accent · cobalt shift</div>
+  <div class="row">
+    <div class="sw on-dark"  style="background:#6f95ff"><span class="name">Market Blue</span><span class="role">dark link-primary</span><span class="hex">#6f95ff</span></div>
+    <div class="sw on-dark"  style="background:#9db5ff"><span class="name">Market Blue Hover</span><span class="role">dark link-hover</span><span class="hex">#9db5ff</span></div>
+  </div>
+</body>
+</html>

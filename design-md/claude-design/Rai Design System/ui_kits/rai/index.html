@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Rai · Agent Control Panel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  html, body, #root { height: 100%; }
+  body { background: var(--bg1); color: var(--fg1); overflow: hidden; }
+  @keyframes rai-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+  @keyframes rai-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .rai-pulse { animation: rai-pulse 1.2s ease-in-out infinite; }
+  .rai-shimmer {
+    background: linear-gradient(90deg, var(--cds-layer-01) 0%, var(--cds-layer-01-hover) 45%, var(--cds-border-subtle) 50%, var(--cds-layer-01-hover) 55%, var(--cds-layer-01) 100%);
+    background-size: 200% 100%;
+    animation: rai-shimmer 1.5s ease-in-out infinite;
+  }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--fg3); }
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel" src="Button.jsx"></script>
+<script type="text/babel" src="Field.jsx"></script>
+<script type="text/babel" src="Tag.jsx"></script>
+<script type="text/babel" src="Masthead.jsx"></script>
+<script type="text/babel" src="LiveFeed.jsx"></script>
+<script type="text/babel" src="Briefing.jsx"></script>
+<script type="text/babel" src="PromptColumn.jsx"></script>
+<script type="text/babel" src="RunDetails.jsx"></script>
+
+<script type="text/babel">
+  const BUNDLE = {
+    base: "You are Rai. 24/7 funding-insights agent. Terse, technical, operational. Use attached skills. Output a markdown briefing.",
+    userMessage: "Scan the last 24h of perpetual-futures funding data. Call out skew, inversions, and notable rate moves.",
+    skills: [
+      { id: 'funding_basics',   label: 'funding basics',   body: 'Annualized funding = 3 × 8h rate × 365 / 3. Positive rate = longs pay shorts.' },
+      { id: 'skew_detection',   label: 'skew detection',   body: 'Flag venues where BTC funding deviates > 2σ from the trailing 7-day median.' },
+      { id: 'inversion_alerts', label: 'inversion alerts', body: 'Report any funding flips from positive to negative within the window.' },
+      { id: 'venue_coverage',   label: 'venue coverage',   body: 'Binance, OKX, Bybit, Deribit. Skip venues with < 50M open interest.' },
+    ],
+  };
+
+  const SEED_HISTORY = [
+    { id: 'run_8f3c1a', agoLabel: 'just now', model: 'haiku-4-5', duration: '1.4s', tokensIn: 12481, tokensOut: 2103,
+      toolCalls: [
+        { name: 'fetch_funding_rates', input: { venue: 'binance', window: '24h' } },
+        { name: 'list_positions',      input: { symbol: 'BTC-PERP' } },
+        { name: 'summarize_skew',      input: { basket: ['BTC','ETH','SOL'] } },
+        { name: 'write_briefing',      input: { format: 'markdown' } },
+      ],
+      briefing: {
+        title: 'BTC funding · narrowing skew across the basket',
+        sections: [
+          { heading: 'Headline', body: 'Funding skew narrowed 12 bps across the BTC perpetuals basket over the last 24h. Binance and OKX converged; Bybit remains an outlier on the short side.' },
+          { heading: 'Notable moves', list: [
+            'BTC-PERP Binance: +0.021% → +0.008% (8h rate)',
+            'ETH-PERP OKX: +0.015% → +0.011%',
+            'SOL-PERP Bybit: -0.004% → -0.009% (inversion deepens)',
+          ]},
+          { heading: 'Take', body: 'No positioning bias worth acting on. The SOL funding inversion on Bybit is worth watching if it extends past 48h.' },
+        ],
+      },
+    },
+    { id: 'run_4e2b0d', agoLabel: '3m ago',  model: 'haiku-4-5', duration: '2.1s', tokensIn: 11203, tokensOut: 1890,
+      toolCalls: [{ name: 'fetch_funding_rates', input: { venue: 'okx' } }, { name: 'write_briefing', input: {} }],
+      briefing: { title: 'Prior run · OKX-focused scan', sections: [ { heading: 'Summary', body: 'OKX funding rates flat across the board.' } ] },
+    },
+    { id: 'run_1a77c3', agoLabel: '14m ago', model: 'haiku-4-5', duration: '1.8s', tokensIn: 10982, tokensOut: 2012,
+      toolCalls: [{ name: 'fetch_funding_rates', input: {} }],
+      briefing: { title: 'Early-morning scan', sections: [ { heading: 'Summary', body: 'Low-volatility overnight session.' } ] },
+    },
+    { id: 'run_c09f18', agoLabel: '1h ago',  model: 'haiku-4-5', duration: '1.6s', tokensIn: 9824, tokensOut: 1744,
+      toolCalls: [{ name: 'fetch_funding_rates', input: {} }, { name: 'list_positions', input: {} }],
+      briefing: { title: 'Hourly cadence', sections: [ { heading: 'Summary', body: 'Nominal skew.' } ] },
+    },
+  ];
+
+  function App() {
+    const [theme, setTheme] = React.useState('light');
+    const [selectedId, setSelectedId] = React.useState(SEED_HISTORY[0].id);
+    const [history, setHistory] = React.useState(SEED_HISTORY);
+    const [selectedSkills, setSelectedSkills] = React.useState(BUNDLE.skills.map(s => s.id));
+    const [userNote, setUserNote] = React.useState('');
+    const [running, setRunning] = React.useState(false);
+    const [events, setEvents] = React.useState([]);
+
+    React.useEffect(() => {
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+    }, [theme]);
+
+    const activeRun = history.find(r => r.id === selectedId) || history[0];
+
+    const runNow = async () => {
+      setRunning(true);
+      setEvents([]);
+      const script = [
+        { type: 'iteration', iteration: 1 },
+        { type: 'llm' },
+        { type: 'tool_start', toolName: 'fetch_funding_rates', preview: '{\n  "venue": "binance"\n}' },
+        { type: 'tool_done',  toolName: 'fetch_funding_rates', ok: true, bytes: 1204 },
+        { type: 'iteration', iteration: 2 },
+        { type: 'tool_start', toolName: 'summarize_skew' },
+        { type: 'tool_done',  toolName: 'summarize_skew', ok: true, bytes: 482 },
+        { type: 'tool_start', toolName: 'write_briefing' },
+        { type: 'tool_done',  toolName: 'write_briefing', ok: true, bytes: 2103 },
+        { type: 'complete', toolCount: 3, duration: '1.4s' },
+      ];
+      for (const ev of script) {
+        await new Promise(r => setTimeout(r, 450));
+        setEvents(prev => [...prev, ev]);
+      }
+      setRunning(false);
+    };
+
+    return (
+      <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <Masthead
+          theme={theme}
+          toggleTheme={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+          lastRunAgo="2m ago"
+          connected={true}
+        />
+        <div style={{ flex: 1, display: 'flex', overflow: 'hidden', minHeight: 0 }}>
+          <main style={{ flex: 1, overflowY: 'auto', padding: 24, minWidth: 0 }}>
+            <div style={{
+              background: 'var(--bg2)',
+              padding: 16,
+              boxShadow: 'inset 0 0 0 1px color-mix(in srgb, var(--border) 85%, transparent)',
+            }}>
+              <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.32px', textTransform: 'uppercase', color: 'var(--fg2)', marginBottom: 16 }}>
+                Market Briefing
+              </div>
+              <LiveFeed events={events} active={running} error={null} />
+              {activeRun ? (
+                <article style={{ fontSize: 13, lineHeight: 1.6, color: 'var(--fg1)' }}>
+                  <h1 style={{ fontSize: 18, fontWeight: 600, margin: '8px 0 12px' }}>{activeRun.briefing.title}</h1>
+                  {activeRun.briefing.sections.map((s, i) => (
+                    <div key={i} style={{ marginBottom: 16 }}>
+                      <h2 style={{ fontSize: 14, fontWeight: 600, margin: '10px 0 6px', letterSpacing: '0.16px' }}>{s.heading}</h2>
+                      {s.body && <p style={{ margin: '4px 0' }}>{s.body}</p>}
+                      {s.list && (
+                        <ul style={{ margin: '4px 0', paddingLeft: 20 }}>
+                          {s.list.map((l, j) => <li key={j} style={{ margin: '2px 0', fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.16px' }}>{l}</li>)}
+                        </ul>
+                      )}
+                    </div>
+                  ))}
+                </article>
+              ) : (
+                <p style={{ color: 'var(--fg2)', fontStyle: 'italic', textAlign: 'center', padding: '48px 0' }}>
+                  No briefings yet — waiting for first agent run
+                </p>
+              )}
+            </div>
+          </main>
+          <PromptColumn
+            bundle={BUNDLE}
+            selectedIds={selectedSkills}
+            onToggle={(id) => setSelectedSkills(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id])}
+            onAll={() => setSelectedSkills(BUNDLE.skills.map(s => s.id))}
+            onDefault={() => setSelectedSkills([])}
+            userNote={userNote}
+            setUserNote={setUserNote}
+            onRun={runNow}
+            running={running}
+          />
+          <RunDetails
+            run={activeRun}
+            runs={history}
+            onSelect={(r) => setSelectedId(r.id)}
+          />
+        </div>
+        <Footer apiBase="http://localhost:3510" model={activeRun?.model || 'haiku-4-5'} />
+      </div>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

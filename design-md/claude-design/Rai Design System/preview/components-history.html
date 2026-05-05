@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { background:#fff; padding:20px 24px; color:#161616; font-family:var(--font-sans); }
+  .label { font-size:10px; text-transform:uppercase; letter-spacing:0.32px; color:#525252; font-weight:600; margin-bottom:10px; }
+  .item {
+    display:flex; gap:8px; align-items:center;
+    padding: 8px 10px; background:#e8e8e8; border:1px solid transparent;
+    font-size:12px; font-family:var(--font-mono); letter-spacing:0.16px;
+    cursor:pointer; margin-bottom:4px;
+  }
+  .item:hover { border-color:#0f62fe; }
+  .item.sel { border-color:#0f62fe; }
+  .item .g { color:#6f6f6f; }
+  .item .id { color:#525252; flex:1; }
+  .item .t  { color:#525252; }
+  .item.sel .g { color:#0f62fe; }
+</style>
+</head>
+<body>
+  <div class="label">History · 5</div>
+  <div class="item sel"><span class="g">▶</span><span class="id">run_8f3c1a</span><span class="t">just now</span></div>
+  <div class="item"><span class="g">▶</span><span class="id">run_4e2b0d</span><span class="t">3m ago</span></div>
+  <div class="item"><span class="g">▶</span><span class="id">run_1a77c3</span><span class="t">14m ago</span></div>
+  <div class="item"><span class="g">▶</span><span class="id">run_c09f18</span><span class="t">1h ago</span></div>
+  <div class="item"><span class="g">▶</span><span class="id">run_9d4e21</span><span class="t">3h ago</span></div>
+</body>
+</html>

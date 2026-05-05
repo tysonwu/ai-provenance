@@ -1,0 +1,23 @@
+---
+description: >-
+  After a fairly large change in a subtree, invoke the /post-change-docs
+  subagent (slash command) to sync README, OpenAPI, .env, guides.
+alwaysApply: true
+---
+
+# Post-change docs
+
+When you **finish** work that touches a **related directory** (the subtree where most changed paths live),
+and when the modification creates structural change or change that worth documentation,
+
+- **New or changed public surface** (HTTP/RPC API, proto, CLI flags, env vars, config schema), or
+- **Architecture / boundaries** (new module, moved entrypoint, renamed package), or
+- **Dependencies or runtime** requirements changed for that area.
+
+**Then** before you call the task done, you MUST scan through documentation directory, which usually notated as `/docs` in path, and conduct documentation update that reflects the current state of project.
+
+If the change is fairly large, such as a change that touches **5+ files**, hand off to the **`/post-change-docs`** subagent (the slash command that runs the post-change-docs workflow) . That subagent owns targeted doc sync for the **current workspace**.
+
+If you cannot trigger slash commands from this session, **tell the user explicitly** to run **`/post-change-docs`** next and give a one-line summary of the subtree and what changed (API, config, etc.) so the subagent has context.
+
+**Skip** when the change is purely internal (private rename, comments-only, formatting) and no doc or contract would be wrong.

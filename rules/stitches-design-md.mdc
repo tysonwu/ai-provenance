@@ -1,0 +1,31 @@
+---
+description: Before UI/design work, locate and follow the nearest DESIGN.md (Stitch design brief).
+globs:
+  - "**/DESIGN.md"
+  - "**/*.tsx"
+  - "**/*.css"
+  - "**/tailwind.config.*"
+alwaysApply: false
+---
+
+# Stitch `DESIGN.md` — read before building UI
+
+Treat `DESIGN.md` as canonical UI/design guidance unless the user overrides it.
+
+## Discovery
+
+```bash
+git ls-files "**/DESIGN.md" 2>/dev/null || find . -name DESIGN.md -not -path '*/node_modules/*'
+```
+
+If multiple files exist, use the one nearest the edited subtree.
+
+## When this applies
+
+- Components/pages/layout/theme/token changes
+- Styling work (CSS/Tailwind/design tokens)
+- Design-related rule authoring (`/create-rule`, `.mdc`)
+
+## If `DESIGN.md` is missing
+
+Note it briefly, follow existing UI code/rules, and offer creating one via `design-md` if relevant.

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #EEEEEE; padding: 20px 24px; font-family: 'DM Sans', sans-serif; display: flex; flex-direction: column; gap: 14px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .label { font-family: 'Space Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: #555368; margin-bottom: 4px; }
+  /* Primary button */
+  .btn-primary { background: #2A2A2A; color: #EEEEEE; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; padding: 10px 20px; border-radius: 9999px; border: none; cursor: pointer; letter-spacing: -0.01em; }
+  .btn-primary:hover { background: #3d3d3d; }
+  /* Secondary / outline */
+  .btn-outline { background: transparent; color: #2A2A2A; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 10px 20px; border-radius: 9999px; border: 1.5px solid rgba(85,83,104,0.35); cursor: pointer; }
+  /* Mint CTA */
+  .btn-mint { background: #28E99F; color: #2A2A2A; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 700; padding: 10px 22px; border-radius: 9999px; border: none; cursor: pointer; }
+  /* Ghost / text link */
+  .btn-ghost { background: transparent; color: #555368; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 400; text-transform: uppercase; letter-spacing: 0.1em; padding: 8px 0; border: none; cursor: pointer; }
+  /* Small */
+  .btn-sm { background: #2A2A2A; color: #EEEEEE; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; padding: 7px 14px; border-radius: 9999px; border: none; cursor: pointer; }
+  /* Disabled */
+  .btn-disabled { background: #D6D6D6; color: #787878; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 10px 20px; border-radius: 9999px; border: none; cursor: not-allowed; }
+</style>
+</head>
+<body>
+<div class="label">[ Buttons ]</div>
+<div class="row">
+  <button class="btn-primary">Start now</button>
+  <button class="btn-outline">Contact Sales</button>
+  <button class="btn-mint">get started</button>
+  <button class="btn-ghost">learn more →</button>
+</div>
+<div class="row">
+  <button class="btn-sm">View Pricing</button>
+  <button class="btn-disabled" disabled>Unavailable</button>
+</div>
+</body>
+</html>

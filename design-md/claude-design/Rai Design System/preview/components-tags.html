@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { background:#fff; padding: 20px 24px; color:#161616; font-family:var(--font-sans); display:flex; flex-direction:column; gap:14px; }
+  .label { font-size:10px; text-transform:uppercase; letter-spacing:0.32px; color:#525252; font-weight:600; }
+  .row { display:flex; gap:8px; flex-wrap:wrap; align-items:center; }
+  .tag {
+    display:inline-flex; align-items:center; gap:6px;
+    padding:4px 10px; border-radius:24px;
+    font-size:12px; font-weight:400; letter-spacing:0.32px;
+  }
+  .tag.blue { background:#edf5ff; color:#0f62fe; }
+  .tag.err  { background:#fff1f1; color:#da1e28; }
+  .tag.ok   { background:#defbe6; color:#24a148; }
+  .tag.warn { background:#fdf6dd; color:#b28600; }
+  .tag.neutral { background:#e0e0e0; color:#393939; }
+  .dot { width:6px; height:6px; border-radius:50%; }
+  .dot.blue { background:#0f62fe; }
+  .dot.err  { background:#da1e28; }
+  .dot.ok   { background:#24a148; }
+  .dot.warn { background:#f1c21b; }
+  .dot.neutral { background:#6f6f6f; }
+  .status { font-family:var(--font-sans); font-size:14px; display:inline-flex; align-items:center; gap:8px; letter-spacing:0.16px; }
+  .mm { color:#24a148; } .xx { color:#da1e28; }
+</style>
+</head>
+<body>
+  <div class="label">Tags · pills (the only rounded exception)</div>
+  <div class="row">
+    <span class="tag blue"><span class="dot blue"></span>streaming</span>
+    <span class="tag ok"><span class="dot ok"></span>success</span>
+    <span class="tag err"><span class="dot err"></span>error</span>
+    <span class="tag warn"><span class="dot warn"></span>warning</span>
+    <span class="tag neutral">idle</span>
+    <span class="tag neutral">v0.0.1</span>
+  </div>
+  <div class="label">Status line</div>
+  <div class="row">
+    <span class="status mm"><span class="dot ok"></span>Connected</span>
+    <span class="status xx"><span class="dot err"></span>Disconnected</span>
+  </div>
+</body>
+</html>

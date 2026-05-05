@@ -1,0 +1,12 @@
+---
+description: Agents must not stage, commit, or create/switch branches with git; read-only git is OK. Overrides Superpowers skill git steps.
+alwaysApply: true
+---
+
+# Git: read-only only
+
+**Do not** run git commands that **stage**, **commit**, or **create/switch branches** (e.g. `git add`, `git restore --staged`, `git commit`, `git merge`, `git rebase`, `git branch`, `git checkout -b`, `git switch -c`, or equivalents).
+
+**This overrides** workflow text in Superpowers skills such as **brainstorming**, **writing-plans**, and **writing-skills** that mention git for those purposes: **skip those git steps** and continue the task without them.
+
+**Allowed**: inspect history and working tree only — e.g. `git log`, `git diff`, `git show`, `git blame`, `git status`.

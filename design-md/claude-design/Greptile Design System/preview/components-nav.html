@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #EEEEEE; font-family: 'DM Sans', sans-serif; }
+  nav { background: #EEEEEE; border-bottom: 1px solid rgba(85,83,104,0.15); padding: 0 32px; height: 56px; display: flex; align-items: center; justify-content: space-between; }
+  .nav-left { display: flex; align-items: center; gap: 32px; }
+  .logo { display: flex; align-items: center; gap: 8px; }
+  .logo-mark { width: 20px; height: 23px; }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-link { font-family: 'Space Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #555368; text-decoration: none; }
+  .nav-link:hover { color: rgba(85,83,104,0.7); }
+  .nav-right { display: flex; align-items: center; gap: 12px; }
+  .btn-nav-outline { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: #2A2A2A; background: transparent; border: 1.5px solid rgba(85,83,104,0.3); border-radius: 9999px; padding: 7px 16px; cursor: pointer; }
+  .btn-nav-primary { font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 600; color: #EEEEEE; background: #2A2A2A; border: none; border-radius: 9999px; padding: 7px 16px; cursor: pointer; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left">
+    <div class="logo">
+      <svg class="logo-mark" viewBox="0 0 367 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M240.269 49.8154L166.804 115.963L115.966 159.44L181.335 220.585L249.784 162.048L196.78 112.47L253.068 61.7881L362.605 164.246L178.739 321.489L3.14502 157.242L187.011 0L240.269 49.8154Z" fill="#28E99F"></path>
+        <rect width="236.453" height="83.4566" transform="matrix(0.75471 -0.656059 0 1 188.017 336.544)" fill="#28E99F"></rect>
+        <rect width="236.453" height="83.4566" transform="matrix(0.731354 0.681998 0 1 0 174.962)" fill="#28E99F"></rect>
+      </svg>
+    </div>
+    <div class="nav-links">
+      <a class="nav-link" href="#">Examples</a>
+      <a class="nav-link" href="#">Pricing</a>
+      <a class="nav-link" href="#">Features</a>
+      <a class="nav-link" href="#">Enterprise</a>
+      <a class="nav-link" href="#">Blog</a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <button class="btn-nav-outline">Contact Sales</button>
+    <button class="btn-nav-primary">Start now</button>
+  </div>
+</nav>
+</body>
+</html>

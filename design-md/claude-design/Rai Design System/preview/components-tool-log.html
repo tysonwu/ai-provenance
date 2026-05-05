@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { background:#fff; padding:20px 24px; color:#161616; font-family:var(--font-mono); font-size:11px; letter-spacing:0.16px; }
+  .label { font-size:10px; font-family:var(--font-sans); text-transform:uppercase; letter-spacing:0.32px; color:#525252; font-weight:600; margin-bottom:10px; }
+  .item { display:flex; align-items:center; gap:8px; padding: 3px 4px; cursor:pointer; }
+  .item:hover { background:#e8e8e8; }
+  .idx { color:#0f62fe; }
+  .name { color:#161616; }
+  .chev { margin-left:auto; color:#525252; opacity:0.35; }
+  .item:hover .chev { opacity:1; }
+  .open { background:#f4f4f4; }
+  .pay { margin: 2px 0 6px 20px; padding: 8px 10px; background:#f4f4f4; border:1px solid rgba(198,198,198,.85); color:#525252; font-size:10px; line-height:1.5; white-space:pre; }
+</style>
+</head>
+<body>
+  <div class="label">Tool call log · 4</div>
+  <div class="item"><span class="idx">1</span><span class="name">fetch funding rates</span><span class="chev">▶</span></div>
+  <div class="item open"><span class="idx">2</span><span class="name">list positions</span><span class="chev">▼</span></div>
+  <pre class="pay">{
+  "venue": "binance",
+  "symbol": "BTC-PERP"
+}</pre>
+  <div class="item"><span class="idx">3</span><span class="name">summarize skew</span><span class="chev">▶</span></div>
+  <div class="item"><span class="idx">4</span><span class="name">write briefing</span><span class="chev">▶</span></div>
+</body>
+</html>

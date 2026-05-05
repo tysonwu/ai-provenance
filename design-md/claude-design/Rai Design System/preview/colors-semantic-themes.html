@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding:0; display:grid; grid-template-columns:1fr 1fr; font-family:var(--font-sans); }
+  .pane { padding: 22px 24px; min-height: 180px; }
+  .light { background:#ffffff; color:#161616; }
+  .dark  { background:#121316; color:#eef0f7; }
+  .label { font-size:10px; text-transform:uppercase; letter-spacing:0.32px; font-weight:600; opacity:0.65; margin-bottom:12px; }
+  .stack { display:flex; flex-direction:column; gap:6px; font-family:var(--font-mono); font-size:11px; letter-spacing:0.16px; }
+  .stack .t { display:flex; gap:10px; align-items:baseline; }
+  .stack .t .hex { opacity:0.55; }
+  .accent { color:#0f62fe; font-weight:600; }
+  .dark .accent { color:#6f95ff; }
+  .bar { width:28px; height:2px; background:#c6c6c6; }
+  .dark .bar { background:#4a5162; opacity:0.4; }
+</style>
+</head>
+<body>
+  <div class="pane light">
+    <div class="label">Light · IBM Carbon</div>
+    <div class="stack">
+      <div class="t"><span>background</span><span class="hex">#ffffff</span></div>
+      <div class="t"><span>text-primary</span><span class="hex">#161616</span></div>
+      <div class="t"><span>text-secondary</span><span class="hex">#525252</span></div>
+      <div class="t"><span>layer-01</span><span class="hex">#f4f4f4</span></div>
+      <div class="t"><span class="accent">link-primary</span><span class="hex">#0f62fe</span></div>
+      <div class="t"><span>border-subtle</span><span class="hex">#c6c6c6</span><div class="bar"></div></div>
+    </div>
+  </div>
+  <div class="pane dark">
+    <div class="label">Dark · Financial Architect</div>
+    <div class="stack">
+      <div class="t"><span>background</span><span class="hex">#121316</span></div>
+      <div class="t"><span>text-primary</span><span class="hex">#eef0f7</span></div>
+      <div class="t"><span>text-secondary</span><span class="hex">#b4b8c8</span></div>
+      <div class="t"><span>layer-01</span><span class="hex">#1b1e24</span></div>
+      <div class="t"><span class="accent">link-primary</span><span class="hex">#6f95ff</span></div>
+      <div class="t"><span>border-subtle</span><span class="hex">#4a5162</span><div class="bar"></div></div>
+    </div>
+  </div>
+</body>
+</html>

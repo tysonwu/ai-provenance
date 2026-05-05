@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; display:grid; grid-template-columns:1fr 1fr; font-family:var(--font-sans); }
+  .pane { padding: 22px 24px; min-height: 220px; }
+  .pane.light { background:#fff; color:#161616; }
+  .pane.dark  { background:#121316; color:#eef0f7; }
+  .label { font-size:10px; text-transform:uppercase; letter-spacing:0.32px; font-weight:600; opacity:0.6; margin-bottom:14px; }
+  .stack { display:flex; flex-direction:column; gap:12px; }
+  .level { display:flex; align-items:center; gap:12px; }
+  .tile { width:64px; height:36px; flex-shrink:0; }
+  .meta { font-family:var(--font-mono); font-size:10px; letter-spacing:0.16px; opacity:.75; }
+  .role { font-size:11px; }
+
+  /* light tonal stack */
+  .light .t0 { background:#ffffff; outline:1px solid #e0e0e0; }
+  .light .t1 { background:#f4f4f4; }
+  .light .t2 { background:#e0e0e0; }
+  .light .t3 { background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.30); }
+
+  /* dark tonal stack */
+  .dark .t0 { background:#121316; outline:1px solid rgba(74,81,98,0.35); }
+  .dark .t1 { background:#1b1e24; }
+  .dark .t2 { background:#252a32; }
+  .dark .t3 { background:#1b1e24; box-shadow:0 8px 24px rgba(0,0,0,0.65); }
+</style>
+</head>
+<body>
+  <div class="pane light">
+    <div class="label">Light · depth via background layering</div>
+    <div class="stack">
+      <div class="level"><div class="tile t0"></div><div class="role">Level 0 · canvas</div><div class="meta">#ffffff</div></div>
+      <div class="level"><div class="tile t1"></div><div class="role">Layer 01 · card</div><div class="meta">#f4f4f4</div></div>
+      <div class="level"><div class="tile t2"></div><div class="role">Layer 02 · elevated</div><div class="meta">#e0e0e0</div></div>
+      <div class="level"><div class="tile t3"></div><div class="role">Raised · dropdown</div><div class="meta">0 2 6 / 30%</div></div>
+    </div>
+  </div>
+  <div class="pane dark">
+    <div class="label">Dark · no-line rule, tonal only</div>
+    <div class="stack">
+      <div class="level"><div class="tile t0"></div><div class="role">Level 0 · canvas</div><div class="meta">#121316</div></div>
+      <div class="level"><div class="tile t1"></div><div class="role">Layer 01 · card</div><div class="meta">#1b1e24</div></div>
+      <div class="level"><div class="tile t2"></div><div class="role">Layer 01 hover</div><div class="meta">#252a32</div></div>
+      <div class="level"><div class="tile t3"></div><div class="role">Overlay</div><div class="meta">0 8 24 / 65%</div></div>
+    </div>
+  </div>
+</body>
+</html>
