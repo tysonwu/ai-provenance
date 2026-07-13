@@ -2,7 +2,7 @@
 name: latency-gc-auditor
 description: Latency and garbage-collection auditor for real-time, low-latency Python scripts — listeners, feed handlers, order-routing, and hot-path event loops. Use PROACTIVELY when reviewing or writing code that is sensitive to microsecond/millisecond pauses, uses gc.freeze/gc.disable, handles WebSocket or ZMQ message loops, or manages long-lived in-process state like order books or accumulators.
 tools: ["Read", "Grep", "Glob"]
-model: sonnet
+model: inherit
 ---
 
 # Latency & GC Auditor

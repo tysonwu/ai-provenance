@@ -53,24 +53,26 @@ This directory is symlinked to **`~/.cursor/agents`**.
 
 Primary upstream source for most agents:
 
+Test update
+
 - `https://github.com/affaan-m/everything-claude-code/blob/main/AGENTS.md`
 
-| Agent file | Origin |
-| --- | --- |
-| `agents/architect.md` | Copied/adapted from upstream (Everything Claude Code `AGENTS.md`). |
-| `agents/performance-optimizer.md` | Copied/adapted from upstream (Everything Claude Code `AGENTS.md`). |
-| `agents/python-reviewer.md` | Copied/adapted from upstream (Everything Claude Code `AGENTS.md`). Lightly modified. |
-| `agents/refactor-cleaner.md` | Copied/adapted from upstream (Everything Claude Code `AGENTS.md`). |
-| `agents/security-reviewer.md` | Copied/adapted from upstream (Everything Claude Code `AGENTS.md`). |
-| `agents/tdd-guide.md` | Copied/adapted from upstream (Everything Claude Code `AGENTS.md`). |
-| `agents/typescript-reviewer.md` | Copied/adapted from upstream (Everything Claude Code `AGENTS.md`). |
-| `agents/post-change-docs.md` | Original (based on `agents/doc-updater.md`). |
-| `agents/latency-gc-auditor.md` | Original. |
-| `agents/ai-provenance.md` | Original. |
+| Agent file                        | Origin                                                                               |
+| --------------------------------- | ------------------------------------------------------------------------------------ |
+| `agents/architect.md`             | Copied/adapted from upstream (Everything Claude Code `AGENTS.md`).                   |
+| `agents/performance-optimizer.md` | Copied/adapted from upstream (Everything Claude Code `AGENTS.md`).                   |
+| `agents/python-reviewer.md`       | Copied/adapted from upstream (Everything Claude Code `AGENTS.md`). Lightly modified. |
+| `agents/refactor-cleaner.md`      | Copied/adapted from upstream (Everything Claude Code `AGENTS.md`).                   |
+| `agents/security-reviewer.md`     | Copied/adapted from upstream (Everything Claude Code `AGENTS.md`).                   |
+| `agents/tdd-guide.md`             | Copied/adapted from upstream (Everything Claude Code `AGENTS.md`).                   |
+| `agents/typescript-reviewer.md`   | Copied/adapted from upstream (Everything Claude Code `AGENTS.md`).                   |
+| `agents/post-change-docs.md`      | Original (based on `agents/doc-updater.md`).                                         |
+| `agents/latency-gc-auditor.md`    | Original.                                                                            |
+| `agents/ai-provenance.md`         | Original.                                                                            |
 
-## CLAUDE.md (Claude Code)
+## CLAUDE.md (Claude Code) and AGENTS.md (Codex)
 
-**Versioned project guidance:** `claude-md/CLAUDE.md`
+**Versioned project guidance:** `claude-md/CLAUDE.md` and `codex-md/AGENTS.md`
 
 Keep it aligned with **`rules/*.mdc`** (Cursor) when both cover the same policies. To audit or reconcile, invoke the **`ai-provenance`** subagent (see `agents/ai-provenance.md`).
 

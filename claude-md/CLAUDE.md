@@ -1,11 +1,35 @@
-# CLAUDE.md
+# Global rules
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides the system-wide general guidance to coding.
+
+## Thinking style
+
+Before jumping into implementation, always pause to critically evaluate the proposed approach - whether it comes from the user or from your own first instinct.
+
+- **Challenge suggestions, including the user's.** If a suggestion seems unidiomatic, over-engineered, or wrong for the context, say so and explain why. Do not simply comply to be agreeable.
+- **Consider alternatives first.** Before committing to any approach, think through at least one or two other options. State the trade-offs briefly so the user can redirect if needed.
+- **Prefer the simpler, more idiomatic path.** A conventional solution that fits the language/framework is almost always better than a clever one-off. If the user proposes something non-standard, name the standard approach and let them choose.
+- **Ask rather than assume on ambiguous requirements.** If the goal is unclear, a short clarifying question beats building the wrong thing.
+
+This applies even when the user sounds confident or the instruction is phrased as a directive. Being genuinely useful means thinking critically, not just executing.
+
+## Asking style
+
+Do not hesitate for giving `AskUserQuestion` block and ask for user's input or wait for user's manual handling when a major bottleneck is reached in a large scale debug process.
+
+Example: Use a `AskUserQuestion` block to pause the process when debugging on a live server and when you would like the user to help restarting it.
 
 ## Writing style
 
-- **Never** use the em dash `—`. If a dash is needed, use the ASCII hyphen-minus `-` (U+002D).
+- **Never** use the em dash `—` (U+2014). If a dash is needed, use the ASCII hyphen-minus `-` (U+002D).
 - For long article writing or explanatory Markdown, use the `/article-writing` skill if available.
+- **Never hard-wrap prose at a fixed column width.** Write each paragraph and each bullet as a single unbroken line in the source, no matter how long. Do not insert a line break mid-sentence and continue with a hanging indent. Markdown renderers reflow paragraphs regardless, so a manual wrap only produces awkward breaks. The only allowed hard line breaks are between block-level elements (paragraphs, list items, headings) or where Markdown itself requires them (e.g. inside a table row).
+
+## Code hygiene
+
+### No hard-coded user or machine paths
+
+**Never** put a specific developer's filesystem layout into the repo: READMEs, example shell snippets, comments, config templates, test fixtures, or copy-paste instructions. Machine-specific roots (especially home directories) must not appear in committed content. Prefer **repo-relative** steps, **environment variables**, or **placeholders** (`<path-to-clone>`, `$REPO_ROOT`).
 
 ## Git: read-only
 
@@ -19,11 +43,9 @@ This overrides any workflow steps in skills (e.g. brainstorming, writing-plans) 
 
 **If a value is required for correctness, its absence must raise immediately. Never substitute a silent fallback that lets broken state propagate.**
 
+- Use `dict.get(k, default)` only when absence is explicitly expected and handled; prefer `msg["key"]` so `KeyError` points straight to schema bugs.
 - Mandatory env vars: check with `raise` / `SystemExit` at load time, never `os.getenv("KEY", "")`.
 - Call `load_dotenv()` **before** `argparse` so `default=os.getenv(...)` in arg definitions sees real values.
-- Use `dict.get(k, default)` only when absence is explicitly expected and handled; prefer `msg["key"]` so `KeyError` points straight to schema bugs.
-- Functions that produce no result return `None`, not a plausible numeric default like `0.0`.
-- Initialise unready pricing/calibration state as `None`, not a plausible number; guard with `if self._state is None: return` at evaluation time.
 - In `except` clauses, distinguish known transient infra errors (set state to `None`, skip window) from unexpected errors (let them propagate and crash loudly).
 
 ## No unsolicited CLI flags in scripts
@@ -35,6 +57,8 @@ This overrides any workflow steps in skills (e.g. brainstorming, writing-plans) 
 - Prefer top-of-file config variables over argparse/yargs/getopts flag proliferation.
 
 ## Post-change documentation
+
+You **MUST** ensure the relevant documentations are up-to-date when a change is made.
 
 After finishing work that touches a related directory and introduces structural change worth documenting (new/changed public API, proto, CLI flags, env vars, config schema, new module, moved entrypoint, renamed package, changed dependencies), scan the relevant `/docs` directory and update documentation to reflect the current state.
 
@@ -51,9 +75,3 @@ git ls-files "**/DESIGN.md" 2>/dev/null || find . -name DESIGN.md -not -path '*/
 ```
 
 If multiple files exist, use the one nearest the edited subtree. Treat it as canonical UI/design guidance unless the user overrides it. If missing, note it briefly and offer creating one via the `design-md` skill.
-
-## Code hygiene
-
-### No hard-coded user or machine paths
-
-**Never** put a specific developer's filesystem layout into the repo: READMEs, example shell snippets, comments, config templates, test fixtures, or copy-paste instructions. Machine-specific roots (especially home directories) must not appear in committed content. Prefer **repo-relative** steps, **environment variables**, or **placeholders** (`<path-to-clone>`, `$REPO_ROOT`).

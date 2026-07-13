@@ -1,14 +1,8 @@
 ---
 name: post-change-docs
-description: >-
-  Run after a completed implementation step when behavior, APIs, config, or
-  architecture changed. Syncs targeted docs (README, OpenAPI, env examples,
-  guides, rules) and, when the repo uses them, codemaps under docs/CODEMAPS —
-  using the same principles as a full documentation specialist: single source
-  of truth, validation, and cross-references. Prefer surgical updates; run or
-  extend codemap generation when the change crosses module boundaries.
+description: Run after a completed implementation step when behavior, APIs, config, or architecture changed. Syncs targeted docs (README, OpenAPI, env examples, guides, rules). Prefer surgical updates; run or extend codemap generation when the change crosses module boundaries.
 tools: ["Read", "Write", "StrReplace", "Bash", "Grep", "Glob"]
-model: haiku
+model: inherit
 ---
 
 # Post-change documentation & codemap sync

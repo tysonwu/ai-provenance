@@ -1,11 +1,11 @@
 ---
-description: >-
-  After a fairly large change in a subtree, invoke the /post-change-docs
-  subagent (slash command) to sync README, OpenAPI, .env, guides.
+description: After a fairly large change in a subtree, invoke the /post-change-docs subagent (slash command) to sync README, OpenAPI, .env, guides.
 alwaysApply: true
 ---
 
 # Post-change docs
+
+You **MUST** ensure the relevant documentations are up-to-date when a change is made.
 
 When you **finish** work that touches a **related directory** (the subtree where most changed paths live),
 and when the modification creates structural change or change that worth documentation,
