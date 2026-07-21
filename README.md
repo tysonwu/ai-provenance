@@ -44,6 +44,7 @@ Other manual upstream source:
 | `codebase-onbarding` | Manually copied/adapted from upstream (`everything-claude-code`) with Claude-specific parts removed |
 | `cli-script-writing` | Original. Supplementary to `rules/no-flag-spam.mdc` |
 | `write-that-down` | Original. |
+| `pandoc` | From claude skill registry, version: https://github.com/majiayu000/claude-skill-registry/blob/main/skills/documents/pandoc/SKILL.md |
 
 ## Agents
 

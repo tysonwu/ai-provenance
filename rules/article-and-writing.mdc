@@ -3,13 +3,10 @@ description: Writing style rule for AI-generated artifacts and articles
 alwaysApply: true
 ---
 
-# AI writing rules (global)
+# Writing style
 
-## Dash rule
+Docs and code comments describe current state, not implementation history. Write what the reader needs to do or know right now - never why/when a feature was added, which conversation or plan produced it, or links to design/planning docs. Don't cite specific endpoint lists or internal rationale in user-facing guides; link to design docs only from developer/architecture docs, never from setup or how-to guides. Same rule for code comments: describe what the code does/why it's structured that way now, not the history of the change ("added for X", "previously did Y", "see PR/issue #123").
 
-- **Never** use the em dash `—` unless unavoidable.
-- If a dash is unavoidable, use the ASCII hyphen-minus `-` (Unicode U+002D), not `—`.
-
-## Long-form rule
-
+- **Never** use the em dash `—` (U+2014). If a dash is needed, use the ASCII hyphen-minus `-` (U+002D).
 - For long article writing or explanatory Markdown, use the `/article-writing` skill if available.
+- **Never hard-wrap prose at a fixed column width.** Write each paragraph and each bullet as a single unbroken line in the source, no matter how long. Do not insert a line break mid-sentence and continue with a hanging indent. Markdown renderers reflow paragraphs regardless, so a manual wrap only produces awkward breaks. The only allowed hard line breaks are between block-level elements (paragraphs, list items, headings) or where Markdown itself requires them (e.g. inside a table row).
