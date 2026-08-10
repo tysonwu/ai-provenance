@@ -44,6 +44,8 @@ Other manual upstream source:
 | `codebase-onbarding` | Manually copied/adapted from upstream (`everything-claude-code`) with Claude-specific parts removed |
 | `cli-script-writing` | Original. Supplementary to `rules/no-flag-spam.mdc` |
 | `write-that-down` | Original. |
+| `project-agent-harness` | Original. |
+| `global-agent-harness` | Original. |
 | `pandoc` | From claude skill registry, version: https://github.com/majiayu000/claude-skill-registry/blob/main/skills/documents/pandoc/SKILL.md |
 
 ## Agents
@@ -78,3 +80,11 @@ Test update
 Keep it aligned with **`rules/*.mdc`** (Cursor) when both cover the same policies. To audit or reconcile, invoke the **`ai-provenance`** subagent (see `agents/ai-provenance.md`).
 
 If your Claude Code install expects a file at `~/.claude/CLAUDE.md`, symlink or copy from `claude-md/CLAUDE.md` per your local setup (do not commit machine-specific absolute paths).
+
+To expose every `CLAUDE.md` below the current directory to Codex without maintaining duplicate content, run:
+
+```bash
+./link-claude-agents.sh
+```
+
+The script creates a relative `AGENTS.md -> CLAUDE.md` symlink beside each discovered `CLAUDE.md` and leaves existing `AGENTS.md` paths untouched.

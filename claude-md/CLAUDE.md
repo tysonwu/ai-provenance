@@ -19,7 +19,7 @@ Do not hesitate for giving `AskUserQuestion` block and ask for user's input or w
 
 Example: Use a `AskUserQuestion` block to pause the process when debugging on a live server and when you would like the user to help restarting it.
 
-## Writing style
+## House style
 
 Docs and code comments describe current state, not implementation history. Write what the reader needs to do or know right now - never why/when a feature was added, which conversation or plan produced it, or links to design/planning docs. Don't cite specific endpoint lists or internal rationale in user-facing guides; link to design docs only from developer/architecture docs, never from setup or how-to guides. Same rule for code comments: describe what the code does/why it's structured that way now, not the history of the change ("added for X", "previously did Y", "see PR/issue #123").
 
@@ -77,3 +77,9 @@ git ls-files "**/DESIGN.md" 2>/dev/null || find . -name DESIGN.md -not -path '*/
 ```
 
 If multiple files exist, use the one nearest the edited subtree. Treat it as canonical UI/design guidance unless the user overrides it. If missing, note it briefly and offer creating one via the `design-md` skill.
+
+## Website fetching
+
+If you have difficulties in exploring websites provided or requested by user, do not hesitate to voice out for the problem. For example, if the website is a SPA, you have to voice out.
+
+Alternatively, you can use `playwright` MCP server to help navigation if the MCP is available.

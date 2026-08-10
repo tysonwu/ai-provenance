@@ -1,0 +1,9 @@
+---
+alwaysApply: true
+---
+
+# Website fetching
+
+If you have difficulties in exploring websites provided or requested by user, do not hesitate to voice out for the problem. For example, if the website is a SPA, you have to voice out.
+
+Alternatively, you can use `playwright` MCP server to help navigation if the MCP is available.
