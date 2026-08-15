@@ -19,6 +19,10 @@ Do not hesitate for giving `AskUserQuestion` block and ask for user's input or w
 
 Example: Use a `AskUserQuestion` block to pause the process when debugging on a live server and when you would like the user to help restarting it.
 
+## Claim confidence level
+
+For every factual claim you make about the codebase, tag it [VERIFIED: <command or file:line>] or [INFERRED].
+
 ## House style
 
 Docs and code comments describe current state, not implementation history. Write what the reader needs to do or know right now - never why/when a feature was added, which conversation or plan produced it, or links to design/planning docs. Don't cite specific endpoint lists or internal rationale in user-facing guides; link to design docs only from developer/architecture docs, never from setup or how-to guides. Same rule for code comments: describe what the code does/why it's structured that way now, not the history of the change ("added for X", "previously did Y", "see PR/issue #123").

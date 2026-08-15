@@ -47,6 +47,8 @@ Other manual upstream source:
 | `project-agent-harness` | Original. |
 | `global-agent-harness` | Original. |
 | `pandoc` | From claude skill registry, version: https://github.com/majiayu000/claude-skill-registry/blob/main/skills/documents/pandoc/SKILL.md |
+| `scribd-capture` | Original. Scroll + network-intercept page images from lazy HTML document viewers, then assemble a PDF. |
+| `playwright-cli` | Official playwright skills from `playwright-cli install --skills` |
 
 ## Agents
 
