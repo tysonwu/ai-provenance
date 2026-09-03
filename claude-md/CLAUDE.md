@@ -21,7 +21,7 @@ Example: Use a `AskUserQuestion` block to pause the process when debugging on a 
 
 ## Claim confidence level
 
-For every factual claim you make about the codebase, tag it [VERIFIED: <command or file:line>] or [INFERRED].
+For every factual claim you make about the codebase, tag it `[VERIFIED: <command or file:line>]` or `[INFERRED]` with italic style.
 
 ## House style
 
@@ -87,3 +87,7 @@ If multiple files exist, use the one nearest the edited subtree. Treat it as can
 If you have difficulties in exploring websites provided or requested by user, do not hesitate to voice out for the problem. For example, if the website is a SPA, you have to voice out.
 
 Alternatively, you can use `playwright` MCP server to help navigation if the MCP is available.
+
+## Claude Code specific: workspace connectors
+
+**DO NOT** remind user about disconnection and non-authorized claude.ai Gmail, Google Calendar, and Google Drive connectors.
